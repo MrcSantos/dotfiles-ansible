@@ -1,0 +1,18 @@
+- hosts: localhost
+  become: true
+  roles:
+    - base
+    - packages
+    - fonts
+    - nnn
+    - zsh
+    - neovim
+    - kitty
+    - lsd
+    - htop
+    - fastfetch
+
+- hosts: localhost
+  become: false
+  roles:
+    - dotfiles
