@@ -1,9 +1,19 @@
+- hosts: all
+  vars_prompt:
+
+    - name: choice_upgrade_distro
+      prompt: Do you want to upgrade your distro? [y/N] 
+      private: false
+
+
 - name: Update and upgrade apt packages
   become: true
   apt:
     upgrade: yes
     update_cache: yes
     cache_valid_time: 86400 #One day
+  when: choice_upgrade_distro == "y" || choice_upgrade_distro == "Y"
+    
 
 - name: Install base packages
   apt:
