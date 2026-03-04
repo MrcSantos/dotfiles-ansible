@@ -4,3 +4,20 @@
     upgrade: yes
     update_cache: yes
     cache_valid_time: 86400 #One day
+
+- name: Install base packages
+  apt:
+    name:
+      - build-essential
+      - pkg-config
+      - libncursesw5-dev
+      - libreadline-dev
+      - curl
+      - wget
+      - unzip
+      - git
+      - git-flow
+      - tmux
+      - vim
+      - cargo
+    state: present
