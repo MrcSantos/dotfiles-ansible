@@ -10,7 +10,7 @@
     - fonts
     - nnn
     - zsh
-    - neovim
+    - nvim
     - others
 
 #- hosts: localhost
