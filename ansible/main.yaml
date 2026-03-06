@@ -11,10 +11,7 @@
     - nnn
     - zsh
     - neovim
-    - kitty
-    - lsd
-    - htop
-    - fastfetch
+    - others
 
 #- hosts: localhost
 #  become: false
