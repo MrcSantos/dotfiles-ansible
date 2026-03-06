@@ -1,0 +1,24 @@
+# roles/neovim/tasks/main.yml
+- name: Install ripgrep
+  apt:
+    name: ripgrep
+    state: present
+
+- name: Install Neovim
+  unarchive:
+    src: https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+    dest: /opt
+    remote_src: yes
+    creates: /opt/nvim-linux-x86_64
+
+- name: Symlink nvim
+  file:
+    src: /opt/nvim-linux-x86_64/bin/nvim
+    dest: /usr/local/bin/nvim
+    state: link
+
+- name: Install NVChad
+  git:
+    repo: https://github.com/NvChad/starter
+    dest: "{{ ansible_env.HOME }}/.config/nvim"
+    depth: 1
