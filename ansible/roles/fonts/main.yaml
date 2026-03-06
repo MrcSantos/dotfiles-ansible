@@ -1,0 +1,15 @@
+# roles/fonts/tasks/main.yml
+- name: Create font directory
+  file:
+    path: /usr/share/fonts/truetype/nerd-fonts
+    state: directory
+
+- name: Download JetBrainsMono Nerd Font
+  unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
+    dest: /usr/share/fonts/truetype/nerd-fonts
+    remote_src: yes
+    creates: /usr/share/fonts/truetype/nerd-fonts/JetBrainsMonoNerdFont-Regular.ttf
+
+- name: Rebuild font cache
+  command: fc-cache -f
