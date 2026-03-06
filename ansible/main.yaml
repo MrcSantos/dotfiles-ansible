@@ -8,13 +8,13 @@
   roles:
     - base
     - fonts
-#    - nnn
-#    - zsh
-#    - neovim
-#    - kitty
-#    - lsd
-#    - htop
-#    - fastfetch
+    - nnn
+    - zsh
+    - neovim
+    - kitty
+    - lsd
+    - htop
+    - fastfetch
 
 #- hosts: localhost
 #  become: false
