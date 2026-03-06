@@ -1,5 +1,36 @@
 - hosts: all
   vars_prompt:
+    - name: choice_upgrade_distro
+      prompt: "Do you want to upgrade your distro? [y/N]"
+      private: false
+
+  tasks:
+    - name: Update and upgrade apt packages
+      become: true
+      ansible.builtin.apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400
+      when: choice_upgrade_distro == "y" or choice_upgrade_distro == "Y"
+
+    - name: Install base packages
+      become: true
+      ansible.builtin.apt:
+        name:
+          - build-essential
+          - pkg-config
+          - libncursesw5-dev
+          - libreadline-dev
+          - curl
+          - wget
+          - unzip
+          - git
+          - git-flow
+          - tmux
+          - vim
+          - cargo
+        state: present- hosts: all
+  vars_prompt:
 
     - name: choice_upgrade_distro
       prompt: Do you want to upgrade your distro? [y/N] 
