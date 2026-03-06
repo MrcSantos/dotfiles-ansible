@@ -1,0 +1,25 @@
+# roles/zsh/tasks/main.yml
+- name: Install zsh
+  apt:
+    name: zsh
+    state: present
+
+- name: Set zsh as default shell
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/zsh
+
+- name: Install oh-my-zsh
+  git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    depth: 1
+
+- name: Install zsh plugins
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/{{ item.path }}"
+  loop:
+    - { repo: "https://github.com/romkatv/powerlevel10k.git", path: "themes/powerlevel10k" }
+    - { repo: "https://github.com/zsh-users/zsh-autosuggestions.git", path: "plugins/zsh-autosuggestions" }
+    - { repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git", path: "plugins/zsh-syntax-highlighting" }
