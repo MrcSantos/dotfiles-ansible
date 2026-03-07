@@ -1,0 +1,23 @@
+- name: Ensure temp directory exists
+  ansible.builtin.file:
+    path: /tmp/mint-themes
+    state: directory
+    mode: "0755"
+
+- name: Download Mint theme packages
+  ansible.builtin.get_url:
+    url: "{{ item }}"
+    dest: "/tmp/mint-themes/{{ item | basename }}"
+    mode: "0644"
+  loop:
+    - http://packages.linuxmint.com/pool/main/m/mint-cursor-themes/mint-cursor-themes_1.0.2_all.deb
+    - http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.3.8_all.deb
+    - http://packages.linuxmint.com/pool/main/m/mint-l-icons/mint-l-icons_1.8.0_all.deb
+    - http://packages.linuxmint.com/pool/main/m/mint-x-icons/mint-x-icons_1.7.5_all.deb
+    - http://packages.linuxmint.com/pool/main/m/mint-y-icons/mint-y-icons_1.9.1_all.deb
+
+- name: Install downloaded deb packages
+  become: true
+  ansible.builtin.apt:
+    deb: "{{ item }}"
+  loop: "{{ lookup('ansible.builtin.fileglob', '/tmp/mint-themes/*.deb', wantlist=True) }}"
