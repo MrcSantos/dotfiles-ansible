@@ -11,7 +11,7 @@
     - nnn
     - zsh
     - nvim
-    - mint_theme
+    - mint_themes
     - others
 
 #- hosts: localhost
