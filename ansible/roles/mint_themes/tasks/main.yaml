@@ -21,3 +21,13 @@
   ansible.builtin.apt:
     deb: "{{ item }}"
   loop: "{{ lookup('ansible.builtin.fileglob', '/tmp/mint-themes/*.deb', wantlist=True) }}"
+
+- name: Configure Cinnamon theme settings
+  ansible.builtin.command: >
+    gsettings set {{ item.schema }} {{ item.key }} {{ item.value }}
+  loop:
+    - { schema: "org.cinnamon.desktop.interface", key: "gtk-theme", value: "Mint-Y-Dark-Purple" }
+    - { schema: "org.cinnamon.desktop.interface", key: "icon-theme", value: "Mint-L-Purple" }
+    - { schema: "org.cinnamon.desktop.interface", key: "cursor-theme", value: "Bibata-Modern-Classic" }
+    - { schema: "org.cinnamon.desktop.wm.preferences", key: "theme", value: "Default" }
+  changed_when: false
